@@ -158,6 +158,7 @@ public class GraphMatrix
     }
 
     /**
+     * Hilfsmethode für die Breitensuche
      * Gibt die Bezeichner der Knoten in der übergebenen Liste auf der Konsole aus
      * 
      * @param warteliste die Liste der Knoten, deren Bezeichner ausgegeben werden sollen
@@ -170,6 +171,54 @@ public class GraphMatrix
         }
     }
 
+    /**
+     * Führt eine Tiefensuche auf dem Graphen durch, beginnend bei dem Knoten mit
+     * dem angegebenen Bezeichner.
+     * @param bezeichnerStartknoten der Bezeichner des Startknotens für die DFS
+     */
+    public void tiefensuche(String bezeichnerStartknoten)
+    {
+        //Datenstrukturen für die Arbeit des Algorithmus erzeugen
+        boolean[] besucht = new boolean[anzahlKnoten];
+
+        //Startknoten auf Existenz prüfen...
+        int startIndex = knotenNummerGeben(bezeichnerStartknoten);
+        if (startIndex != -1)
+        {
+            //... und die Tiefensuche rekursiv starten
+            tiefensucheRekursiv(startIndex, besucht);
+        }
+        else
+        {
+            System.out.println("Startknoten nicht gefunden: " + bezeichnerStartknoten);
+        }
+    }
+
+    /**
+     * Hilfsmethode für die Tiefensuche
+     * Führt den eigentlichen Tiefensuche-Algorithmus rekursiv durch.
+     * @param aktuellerIndex der Index des aktuellen Knotens
+     * @param besucht das Array, das angibt, welche Knoten bereits besucht wurden
+     */
+    private void tiefensucheRekursiv(int aktuellerIndex, boolean[] besucht)
+    {
+        //aktuellen Knoten als besucht markieren und ausgeben
+        besucht[aktuellerIndex] = true;
+        System.out.println("Aktueller Knoten: " + knoten[aktuellerIndex].bezeichnerGeben());
+
+        //prüfe alle Nachbarknoten und rufe die Tiefensuche rekursiv auf,
+        //wenn sie noch nicht besucht worden sind
+        for (int i = 0; i < anzahlKnoten; i++)
+        {
+            if (matrix[aktuellerIndex][i] > Integer.MIN_VALUE && !besucht[i])
+            {
+                tiefensucheRekursiv(i, besucht);
+            }
+        }
+
+        System.out.println("Knoten " + knoten[aktuellerIndex].bezeichnerGeben() + " vollständig bearbeitet.");
+        System.out.println("-----------------------------");
+    }
 
     /**
      * Bestimmt den kürzesten Weg zwischen zwei Knoten im Graphen und gibt diesen
@@ -236,6 +285,7 @@ public class GraphMatrix
     }
     
     /**
+     * Hilfsmethode für den Dijkstra-Algorithmus
      * Gibt den kürzesten Weg vom Startknoten zum Zielknoten auf der Konsole aus.
      * @param startknoten Bezeichner des Startknotens
      * @param zielknoten Bezeichner des Zielknotens
@@ -273,6 +323,7 @@ public class GraphMatrix
     }
 
     /**
+     * Hilfsmethode für den Dijkstra-Algorithmus
      * Bestimmt den Index des Knotens mit der kürzesten Distanz zum Startknoten, der noch nicht 
      * besucht wurde.
      * @param besucht das Array, das angibt, welche Knoten bereits besucht wurden
