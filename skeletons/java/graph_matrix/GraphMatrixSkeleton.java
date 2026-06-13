@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class GraphMatrix
+public class GraphMatrixSkeleton
 {
     // Attribute der Klasse GraphMatrix deklarieren
 
@@ -25,9 +25,9 @@ public class GraphMatrix
      * 
      * @param warteliste die Liste der Knoten, deren Bezeichner ausgegeben werden sollen
      */
-    private void wartelisteAusgeben(ArrayList<Knoten> warteliste)
+    private void wartelisteAusgeben(ArrayList<KnotenSkeleton> warteliste)
     {
-        for (Knoten knoten : warteliste)
+        for (KnotenSkeleton knoten : warteliste)
         {
             System.out.println("  " + knoten.bezeichnerGeben());
         }

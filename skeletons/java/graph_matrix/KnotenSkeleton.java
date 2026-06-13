@@ -1,4 +1,4 @@
-public class Knoten
+public class KnotenSkeleton
 {
     //Attribute der Klasse Knoten deklarieren
 
